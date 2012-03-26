@@ -1,0 +1,37 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activesupport (3.0.12)
+    columnize (0.3.6)
+    httparty (0.8.1)
+      multi_json
+      multi_xml
+    json (1.6.5)
+    linecache (0.46)
+      rbx-require-relative (> 0.0.4)
+    mime-types (1.17.2)
+    multi_json (1.1.0)
+    multi_xml (0.4.2)
+    nokogiri (1.5.0)
+    rbx-require-relative (0.0.9)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    ruby-debug (0.10.4)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.4.0)
+    ruby-debug-base (0.10.4)
+      linecache (>= 0.3)
+    tumblr-api (0.1.4)
+      activesupport
+      httparty
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport (~> 3.0.0)
+  json
+  nokogiri
+  rest-client
+  ruby-debug
+  tumblr-api

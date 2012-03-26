@@ -5,6 +5,8 @@ require 'ostruct'
 require 'rest_client'
 require 'json'
 
+# This no longer works do to gem changes and MT changing the export format, but I am leaving it around in case it helps anyone working with older formats. -Dan
+
 # multiple gems use the require tumblr, this one refers to http://github.com/mwunsch/tumblr
 # note that ruby-debug and the weary lib, which makes reqs for this tumblr gem, don't play nicely together
 require 'tumblr'
@@ -73,7 +75,7 @@ class Mt_tumblr_converter
     comments = []
     entry_peices = entry.split("-----\n")
     entry_peices.each_with_index do |peice, index|
-      #the comments start at entry[5] and go until there are no more items. a < length loop should be able to get all comments, but 
+      #the comments start at entry[5] and go until there are no more items. a < length loop should be able to get all comments, but
       unless(index<5)
         if peice.strip.length!=0
           comment_author = peice.match(/AUTHOR: (.*)/)[1]
@@ -116,12 +118,12 @@ class Mt_tumblr_converter
     thread = JSON.parse(resource['/get_thread_by_url?forum_api_key='+forum_api_key+'&url='+url].get)["message"]
 
     # If a Disqus thread is not found with the current url, create a new thread and add the url.
-    if thread.nil?  
+    if thread.nil?
       thread = JSON.parse(resource['/thread_by_identifier/'].post(:forum_api_key => forum_api_key, :identifier => title, :title => title))["message"]["thread"]
       # Update the Disqus thread with the current article url
-      resource['/update_thread/'].post(:forum_api_key => forum_api_key, :thread_id => thread["id"], :url => url) 
+      resource['/update_thread/'].post(:forum_api_key => forum_api_key, :thread_id => thread["id"], :url => url)
     end
-    
+
     # Import posts here
     comments.each do |comment|
       begin
@@ -138,7 +140,7 @@ class Mt_tumblr_converter
       end
     end
   end
-  
+
 end
 
 
@@ -146,7 +148,7 @@ end
 filename = ARGV.shift
 user = ARGV.shift #tumblr email login
 pass = ARGV.shift #tumblr pass
-tumblr_uri = ARGV.shift 
+tumblr_uri = ARGV.shift
 disqus_shortname = ARGV.shift
 disqus_user_api_key = ARGV.shift
 
